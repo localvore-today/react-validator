@@ -1,6 +1,6 @@
 import React from 'react';
 import { union } from 'lodash';
-import validator from './utils/validator';
+import validator from './validator';
 
 export default function withFormValidations(WrappedComponent, inputs, redux) {
   return class extends React.Component {
