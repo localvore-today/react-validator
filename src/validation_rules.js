@@ -11,7 +11,7 @@ export const max = (val, max) => {
   return val >= max;
 }
 
-export const required = val => val !== '';
+export const required = val => val && val !== '';
 
 export const hasNumber = val => /\d/.test(val);
 
