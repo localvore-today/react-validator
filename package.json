@@ -1,6 +1,6 @@
 {
   "name": "react-validator",
-  "version": "1.0.0",
+  "version": "0.1.2",
   "description": "react-validator React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -10,6 +10,21 @@
     "lib",
     "umd"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/localvore-today/react-validator.git"
+  },
+  "keywords": [
+    "react",
+    "forms",
+    "validation"
+  ],
+  "author": "Localvore Today",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/localvore-today/react-validator/issues"
+  },
+  "homepage": "https://github.com/localvore-today/react-validator#readme",
   "scripts": {
     "build": "nwb build-react-component",
     "clean": "nwb clean-module && npm clean-demo",
@@ -28,12 +43,5 @@
     "nwb": "0.15.x",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
-  },
-  "author": "",
-  "homepage": "",
-  "license": "MIT",
-  "repository": "",
-  "keywords": [
-    "react-component"
-  ]
+  }
 }
