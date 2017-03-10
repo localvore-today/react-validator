@@ -1,6 +1,6 @@
 export const number = val => /^-?\d*\.?\d*$/.test(val);
 
-export const email = val => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val);
+export const email = val => /^[_a-z0-9-]+(\.[_a-z0-9-]+)*(\+[a-z0-9-]+)?@[a-z0-9-]+(\.[a-z0-9-]+)*$/i.test(val);
 
 export const notEmpty = val => /\S+/.test(val);
 

@@ -84,7 +84,7 @@ var validator = function () {
   };
 
   validator.prototype.isRuleValid = function isRuleValid(rule) {
-    if (rule && (Rules[rule] || this._validations[rule])) {
+    if (rule && (this._validations[rule] || Rules[rule])) {
 
       var ruleToEval = Rules[rule] || this._validations[rule];
       var hasArgs = this.hasArgs(rule);

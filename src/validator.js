@@ -71,7 +71,7 @@ export default class validator {
   }
 
   isRuleValid(rule) {
-    if (rule && (Rules[rule] || this._validations[rule])) {
+    if (rule && (this._validations[rule] || Rules[rule])) {
 
       let ruleToEval = Rules[rule] || this._validations[rule];
       let hasArgs = this.hasArgs(rule);

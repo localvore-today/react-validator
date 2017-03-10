@@ -2,11 +2,11 @@ import React from 'react';
 import { union } from 'lodash';
 import validator from './validator';
 
-export default function withFormValidations(WrappedComponent, inputs, redux) {
+export default function withFormValidations(WrappedComponent, inputs, redux, validations) {
   return class extends React.Component {
     state = {
       inputs: inputs.map(i => {
-        i.validations = new validator(i.rules, redux)
+        i.validations = new validator(i.rules, redux, validations)
         return i;
       })
     };

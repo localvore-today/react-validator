@@ -10,7 +10,7 @@ import React from 'react';
 import { union } from 'lodash';
 import validator from './validator';
 
-export default function withFormValidations(WrappedComponent, inputs, redux) {
+export default function withFormValidations(WrappedComponent, inputs, redux, validations) {
   return function (_React$Component) {
     _inherits(_class2, _React$Component);
 
@@ -25,7 +25,7 @@ export default function withFormValidations(WrappedComponent, inputs, redux) {
 
       return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
         inputs: inputs.map(function (i) {
-          i.validations = new validator(i.rules, redux);
+          i.validations = new validator(i.rules, redux, validations);
           return i;
         })
       }, _this._field = function (name) {
