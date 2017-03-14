@@ -55,12 +55,12 @@ describe('validator with redux', () => {
   it('should be invalid', () => {
     let dispatchSpy = expect.spyOn(valid._redux.store, 'dispatch').andCallThrough();
     let actionSpy = expect.spyOn(valid._redux.actions, 'asyncReduxAction').andCallThrough();
-    let val = '';
+    let val = 'test@test.com';
     valid.val = val;
     valid.checkRules();
     expect(dispatchSpy).toHaveBeenCalled();
     expect(actionSpy).toHaveBeenCalledWith(val);
-    expect(valid.errors.length).toBe(1);
+    expect(valid.errors.length).toBe(0);
   });
 });
 

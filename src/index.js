@@ -46,8 +46,11 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
 
     _valid = input => {
       this.state.inputs.map(i => {
-        input && input.label === i.label ? i.validations.checkRules() : i
-        !input && i.validations.checkRules();
+        if (input && input.label === i.label) {
+          i.validations.checkRules();
+        } else if (!input) {
+          i.validations.checkRules();
+        }
         return i;
       });
       let errors = this.state.inputs.filter(i => i.validations.errors.length > 0);

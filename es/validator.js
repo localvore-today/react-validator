@@ -66,6 +66,7 @@ var validator = function () {
     this._val = '';
     this._redux = redux;
     this._validations = validations || {};
+    this._reduxRules = [];
     this._errors = [];
   }
 
@@ -75,6 +76,13 @@ var validator = function () {
     this._errors = this._rules.filter(function (r) {
       return _this.isRuleValid(r.rule);
     });
+
+    // only run redux async rules if all synchronous rules have passed
+    if (this._reduxRules.length > 0 && this._errors.length < 1) {
+      this._errors = this._reduxRules.filter(function (r) {
+        return _this._redux.store.dispatch(_this._redux.actions[r](_this._val));
+      });
+    }
   };
 
   validator.prototype.hasArgs = function hasArgs(rule) {
@@ -85,14 +93,12 @@ var validator = function () {
 
   validator.prototype.isRuleValid = function isRuleValid(rule) {
     if (rule && (this._validations[rule] || Rules[rule])) {
-
       var ruleToEval = Rules[rule] || this._validations[rule];
       var hasArgs = this.hasArgs(rule);
       var method = partial(ruleToEval, this._val);
       return hasArgs ? !method(hasArgs.args) : !method();
     } else if (rule && this._redux.actions[rule]) {
-
-      return this._redux.store.dispatch(this._redux.actions[rule](this._val));
+      this._reduxRules.push(rule);
     }
   };
 

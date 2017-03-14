@@ -59,11 +59,17 @@ export default class validator {
     this._val = '';
     this._redux = redux;
     this._validations = validations || {};
+    this._reduxRules = [];
     this._errors = [];
   }
 
   checkRules() {
     this._errors = this._rules.filter(r => this.isRuleValid(r.rule));
+
+    // only run redux async rules if all synchronous rules have passed
+    if (this._reduxRules.length > 0 && this._errors.length < 1) {
+      this._errors = this._reduxRules.filter(r => this._redux.store.dispatch(this._redux.actions[r](this._val)));
+    }
   }
 
   hasArgs(rule) {
@@ -72,16 +78,12 @@ export default class validator {
 
   isRuleValid(rule) {
     if (rule && (this._validations[rule] || Rules[rule])) {
-
       let ruleToEval = Rules[rule] || this._validations[rule];
       let hasArgs = this.hasArgs(rule);
       let method = partial(ruleToEval, this._val);
       return hasArgs ? !method(hasArgs.args) : !method();
-
     } else if (rule && this._redux.actions[rule]) {
-
-      return this._redux.store.dispatch(this._redux.actions[rule](this._val));
-
+      this._reduxRules.push(rule);
     }
   }
 
