@@ -75,6 +75,10 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
         _this.state.inputs.map(function (i) {
           return i.validations.reset();
         });
+      }, _this._resetInputs = function () {
+        _this.state.inputs.map(function (i) {
+          return i.validations.val = '';
+        });
       }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -84,6 +88,7 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
         inputs: this.state.inputs,
         onChange: this._onChange,
         reset: this._reset,
+        resetInputs: this._resetInputs,
         valid: this._valid }));
     };
 

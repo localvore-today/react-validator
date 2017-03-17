@@ -13,6 +13,11 @@ export var phone = function phone(val) {
   );
 };
 
+export var url = function url(val) {
+  return (/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/.test(val)
+  );
+};
+
 export var notEmpty = function notEmpty(val) {
   return (/\S+/.test(val)
   );
