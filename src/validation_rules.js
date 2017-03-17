@@ -4,6 +4,8 @@ export const email = val => /^[_a-z0-9-]+(\.[_a-z0-9-]+)*(\+[a-z0-9-]+)?@[a-z0-9
 
 export const phone = val => /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(val);
 
+export const url = val => /^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/.test(val);
+
 export const notEmpty = val => /\S+/.test(val);
 
 export const match = (val1, val2) => val1 === val2;

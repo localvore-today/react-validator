@@ -102,6 +102,11 @@ type: `function`
 
 clears out any validation errors
 
+### `resetInputs`
+
+type: `function`
+
+clears all values on input validations
 
 ### `valid`
 
