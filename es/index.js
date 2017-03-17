@@ -72,13 +72,15 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
         _this.setState({ inputs: union(errors, _this.state.inputs) });
         return errors.length < 1;
       }, _this._reset = function () {
-        _this.state.inputs.map(function (i) {
-          return i.validations.reset();
-        });
+        _this.setState({ inputs: _this.state.inputs.map(function (i) {
+            i.validations.reset();
+            return i;
+          }) });
       }, _this._resetInputs = function () {
-        _this.state.inputs.map(function (i) {
-          return i.validations.val = '';
-        });
+        _this.setState({ inputs: _this.state.inputs.map(function (i) {
+            i.validations.val = '';
+            return i;
+          }) });
       }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 

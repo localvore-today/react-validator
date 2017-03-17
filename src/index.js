@@ -59,11 +59,17 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
     }
 
     _reset = () => {
-      this.state.inputs.map(i => i.validations.reset());
+      this.setState({ inputs: this.state.inputs.map(i => {
+        i.validations.reset();
+        return i;
+      }) });
     }
 
     _resetInputs = () => {
-      this.state.inputs.map(i => i.validations.val = '');
+      this.setState({ inputs: this.state.inputs.map(i => {
+        i.validations.val = '';
+        return i;
+      }) });
     }
 
     render() {
