@@ -62,6 +62,10 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
       this.state.inputs.map(i => i.validations.reset());
     }
 
+    _resetInputs = () => {
+      this.state.inputs.map(i => i.validations.val = '');
+    }
+
     render() {
       return <WrappedComponent
         {...this.props}
@@ -69,6 +73,7 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
         inputs={this.state.inputs}
         onChange={this._onChange}
         reset={this._reset}
+        resetInputs={this._resetInputs}
         valid={this._valid} />
     }
   }
