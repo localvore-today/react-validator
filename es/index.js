@@ -59,8 +59,11 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
         });
       }, _this._valid = function (input) {
         _this.state.inputs.map(function (i) {
-          input && input.label === i.label ? i.validations.checkRules() : i;
-          !input && i.validations.checkRules();
+          if (input && input.label === i.label) {
+            i.validations.checkRules();
+          } else if (!input) {
+            i.validations.checkRules();
+          }
           return i;
         });
         var errors = _this.state.inputs.filter(function (i) {
