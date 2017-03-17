@@ -123,3 +123,27 @@ describe('url validation', () => {
     expect(valid.errors.length).toBe(1);
   });
 });
+
+describe('optional rule validation', () => {
+  beforeEach(() => {
+    valid = new validator([{
+      rule: 'url',
+      message: 'A valid url is required'
+    }, {
+      rule: 'optional',
+      message: ''
+    }]);
+  });
+
+  it('should be valid', () => {
+    valid.val = '';
+    valid.checkRules();
+    expect(valid.errors.length).toBe(0);
+  });
+
+  it('should not be valid', () => {
+    valid.val = 'grillwork';
+    valid.checkRules();
+    expect(valid.errors.length).toBe(2);
+  });
+});

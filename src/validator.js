@@ -64,12 +64,19 @@ export default class validator {
   }
 
   checkRules() {
-    this._errors = this._rules.filter(r => this.isRuleValid(r.rule));
+    let optional = false;
+    this._errors = this._rules.filter(r => {
+      if (r.rule === 'optional' && this._val === '') optional = true;
+      return this.isRuleValid(r.rule);
+    });
 
     // only run redux async rules if all synchronous rules have passed
     if (this._reduxRules.length > 0 && this._errors.length < 1) {
       this._errors = this._reduxRules.filter(r => this._redux.store.dispatch(this._redux.actions[r](this._val)));
     }
+
+    // check for optional override
+    if (optional) this._errors = [];
   }
 
   hasArgs(rule) {
