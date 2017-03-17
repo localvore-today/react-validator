@@ -2,6 +2,8 @@ export const number = val => /^-?\d*\.?\d*$/.test(val);
 
 export const email = val => /^[_a-z0-9-]+(\.[_a-z0-9-]+)*(\+[a-z0-9-]+)?@[a-z0-9-]+(\.[a-z0-9-]+)*$/i.test(val);
 
+export const phone = val => /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(val);
+
 export const notEmpty = val => /\S+/.test(val);
 
 export const match = (val1, val2) => val1 === val2;
