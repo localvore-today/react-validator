@@ -73,7 +73,9 @@ var validator = function () {
   validator.prototype.checkRules = function checkRules() {
     var _this = this;
 
+    var optional = false;
     this._errors = this._rules.filter(function (r) {
+      if (r.rule === 'optional' && _this._val === '') optional = true;
       return _this.isRuleValid(r.rule);
     });
 
@@ -83,6 +85,9 @@ var validator = function () {
         return _this._redux.store.dispatch(_this._redux.actions[r](_this._val));
       });
     }
+
+    // check for optional override
+    if (optional) this._errors = [];
   };
 
   validator.prototype.hasArgs = function hasArgs(rule) {
