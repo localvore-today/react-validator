@@ -14,7 +14,7 @@ export var phone = function phone(val) {
 };
 
 export var url = function url(val) {
-  return (/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/.test(val)
+  return (/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(val)
   );
 };
 

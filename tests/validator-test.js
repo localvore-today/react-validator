@@ -96,3 +96,30 @@ describe('validator with custom validation', () => {
     expect(valid.errors.length).toBe(1);
   });
 });
+
+describe('url validation', () => {
+  beforeEach(() => {
+    valid = new validator([{
+      rule: 'url',
+      message: 'A valid url is required'
+    }]);
+  });
+
+  it('should be valid', () => {
+    valid.val = 'http://www.grillwork.io';
+    valid.checkRules();
+    expect(valid.errors.length).toBe(0);
+  });
+
+  it('should be valid', () => {
+    valid.val = 'http://grillwork.io';
+    valid.checkRules();
+    expect(valid.errors.length).toBe(0);
+  });
+
+  it('should not be valid', () => {
+    valid.val = 'grillwork';
+    valid.checkRules();
+    expect(valid.errors.length).toBe(1);
+  });
+});
