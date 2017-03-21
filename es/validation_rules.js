@@ -1,3 +1,5 @@
+import { isArray } from 'lodash';
+
 export var number = function number(val) {
   return (/^-?\d*\.?\d*$/.test(val)
   );
@@ -37,7 +39,7 @@ export var max = function max(val, _max) {
 };
 
 export var required = function required(val) {
-  return val && val !== '';
+  return val && !isArray(val) && val !== '' || val && isArray(val) && val.length > 0;
 };
 
 export var hasNumber = function hasNumber(val) {

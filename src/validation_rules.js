@@ -1,3 +1,5 @@
+import { isArray } from 'lodash';
+
 export const number = val => /^-?\d*\.?\d*$/.test(val);
 
 export const email = val => /^[_a-z0-9-]+(\.[_a-z0-9-]+)*(\+[a-z0-9-]+)?@[a-z0-9-]+(\.[a-z0-9-]+)*$/i.test(val);
@@ -17,7 +19,7 @@ export const max = (val, max) => {
   return val >= max;
 }
 
-export const required = val => val && val !== '';
+export const required = val => ((val && !isArray(val) && val !== '') || (val && isArray(val) && val.length > 0));
 
 export const hasNumber = val => /\d/.test(val);
 
