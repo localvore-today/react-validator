@@ -58,6 +58,8 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
           })
         });
       }, _this._valid = function (inputs) {
+        var errors = [];
+
         if (inputs && !isArray(inputs)) {
           inputs = [inputs];
         }
@@ -70,16 +72,25 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
           }
           return i;
         });
-        var errors = _this.state.inputs.filter(function (i) {
-          return i.validations.errors.length > 0;
-        });
+
+        if (inputs) {
+          errors = inputs.filter(function (i) {
+            return i.validations.errors.length > 0;
+          });
+        } else {
+          errors = _this.state.inputs.filter(function (i) {
+            return i.validations.errors.length > 0;
+          });
+        }
+
         _this.setState({ inputs: union(errors, _this.state.inputs) });
         return errors.length < 1;
       }, _this._reset = function () {
         _this.setState({ inputs: _this.state.inputs.map(function (i) {
             i.validations.reset();
             return i;
-          }) });
+          })
+        });
       }, _this._resetInputs = function () {
         _this.setState({ inputs: _this.state.inputs.map(function (i) {
             i.validations.val = '';

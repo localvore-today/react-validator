@@ -45,6 +45,8 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
     }
 
     _valid = inputs => {
+      let errors = [];
+
       if (inputs && !isArray(inputs)) {
         inputs = [inputs];
       }
@@ -57,16 +59,23 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
         }
         return i;
       });
-      let errors = this.state.inputs.filter(i => i.validations.errors.length > 0);
+
+      if (inputs) {
+        errors = inputs.filter(i => i.validations.errors.length > 0);
+      } else {
+        errors = this.state.inputs.filter(i => i.validations.errors.length > 0);
+      }
+
       this.setState({ inputs: union(errors, this.state.inputs)});
       return errors.length < 1;
     }
 
     _reset = () => {
       this.setState({ inputs: this.state.inputs.map(i => {
-        i.validations.reset();
-        return i;
-      }) });
+          i.validations.reset();
+          return i;
+        }) 
+      });
     }
 
     _resetInputs = () => {
