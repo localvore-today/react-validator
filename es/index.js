@@ -7,7 +7,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React from 'react';
-import { union, isArray } from 'lodash';
+import { isArray } from 'lodash';
 import validator from './validator';
 
 export default function withFormValidations(WrappedComponent, inputs, redux, validations) {
@@ -64,26 +64,22 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
           inputs = [inputs];
         }
 
-        _this.state.inputs.map(function (i) {
-          if (inputs && inputs.indexOf(i) >= 0) {
-            i.validations.checkRules();
-          } else if (!inputs) {
-            i.validations.checkRules();
-          }
-          return i;
+        _this.setState({ inputs: _this.state.inputs.map(function (i) {
+            if (inputs && inputs.indexOf(i) >= 0) {
+              i.validations.checkRules();
+            } else if (!inputs) {
+              i.validations.checkRules();
+            }
+            return i;
+          })
         });
 
-        if (inputs) {
-          errors = inputs.filter(function (i) {
-            return i.validations.errors.length > 0;
-          });
-        } else {
-          errors = _this.state.inputs.filter(function (i) {
-            return i.validations.errors.length > 0;
-          });
-        }
+        inputs ? errors = _this.state.inputs.filter(function (i) {
+          return inputs.indexOf(i) >= 0 && i.validations.errors.length > 0;
+        }) : errors = _this.state.inputs.filter(function (i) {
+          return i.validations.errors.length > 0;
+        });
 
-        _this.setState({ inputs: union(errors, _this.state.inputs) });
         return errors.length < 1;
       }, _this._reset = function () {
         _this.setState({ inputs: _this.state.inputs.map(function (i) {
