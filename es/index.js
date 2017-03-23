@@ -7,7 +7,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React from 'react';
-import { union } from 'lodash';
+import { union, isArray } from 'lodash';
 import validator from './validator';
 
 export default function withFormValidations(WrappedComponent, inputs, redux, validations) {
@@ -57,11 +57,15 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
             return i;
           })
         });
-      }, _this._valid = function (input) {
+      }, _this._valid = function (inputs) {
+        if (inputs && !isArray(inputs)) {
+          inputs = [inputs];
+        }
+
         _this.state.inputs.map(function (i) {
-          if (input && input.label === i.label) {
+          if (inputs && inputs.indexOf(i) >= 0) {
             i.validations.checkRules();
-          } else if (!input) {
+          } else if (!inputs) {
             i.validations.checkRules();
           }
           return i;

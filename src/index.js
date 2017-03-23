@@ -1,5 +1,5 @@
 import React from 'react';
-import { union } from 'lodash';
+import { union, isArray } from 'lodash';
 import validator from './validator';
 
 export default function withFormValidations(WrappedComponent, inputs, redux, validations) {
@@ -44,11 +44,15 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
       });
     }
 
-    _valid = input => {
+    _valid = inputs => {
+      if (inputs && !isArray(inputs)) {
+        inputs = [inputs];
+      }
+
       this.state.inputs.map(i => {
-        if (input && input.label === i.label) {
+        if (inputs && inputs.indexOf(i) >= 0) {
           i.validations.checkRules();
-        } else if (!input) {
+        } else if (!inputs) {
           i.validations.checkRules();
         }
         return i;
