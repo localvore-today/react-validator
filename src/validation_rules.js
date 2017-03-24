@@ -8,7 +8,7 @@ export const phone = val => /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]
 
 export const url = val => /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(val);
 
-export const optional = val => val === '';
+export const optional = val => val !== '';
 
 export const notEmpty = val => /\S+/.test(val);
 

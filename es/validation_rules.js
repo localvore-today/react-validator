@@ -21,7 +21,7 @@ export var url = function url(val) {
 };
 
 export var optional = function optional(val) {
-  return val === '';
+  return val !== '';
 };
 
 export var notEmpty = function notEmpty(val) {
