@@ -71,8 +71,9 @@ export default class validator {
     });
 
     // only run redux async rules if all synchronous rules have passed
+    // currently not logging synchronous errors for redux callbacks, use store state
     if (this._reduxRules.length > 0 && this._errors.length < 1) {
-      this._errors = this._reduxRules.filter(r => this._redux.store.dispatch(this._redux.actions[r](this._val)));
+      this._reduxRules.forEach(r => this._redux.store.dispatch(this._redux.actions[r](this._val)));
     }
 
     // check for optional override
