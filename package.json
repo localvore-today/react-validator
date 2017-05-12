@@ -1,6 +1,6 @@
 {
   "name": "react-validator",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "react-validator React component",
   "main": "lib/index.js",
   "module": "es/index.js",
