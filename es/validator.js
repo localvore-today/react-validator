@@ -3,7 +3,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 import * as Rules from './validation_rules';
-import { partial } from 'lodash';
+import { find, partial } from 'lodash';
 
 /**
    * Creates a validator instance
@@ -92,7 +92,7 @@ var validator = function () {
   };
 
   validator.prototype.hasArgs = function hasArgs(rule) {
-    return this._rules.find(function (r) {
+    return find(this._rules, function (r) {
       return r.rule === rule && r.args;
     });
   };

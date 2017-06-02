@@ -7,7 +7,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React from 'react';
-import { isArray } from 'lodash';
+import { find, isArray } from 'lodash';
 import validator from './validator';
 
 export default function withFormValidations(WrappedComponent, inputs, redux, validations) {
@@ -29,7 +29,7 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
           return i;
         })
       }, _this._field = function (name) {
-        return _this.state.inputs.find(function (i) {
+        return find(_this.state.inputs, function (i) {
           return i.label === name;
         });
       }, _this._syncPasswordMatchValidator = function (input) {

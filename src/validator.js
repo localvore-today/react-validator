@@ -1,5 +1,5 @@
 import * as Rules from './validation_rules';
-import { partial } from 'lodash';
+import { find, partial } from 'lodash';
 
 /**
    * Creates a validator instance
@@ -81,7 +81,7 @@ export default class validator {
   }
 
   hasArgs(rule) {
-    return this._rules.find(r => r.rule === rule && r.args);
+    return find(this._rules, r => r.rule === rule && r.args);
   }
 
   isRuleValid(rule) {

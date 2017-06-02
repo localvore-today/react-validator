@@ -1,5 +1,5 @@
 import React from 'react';
-import { isArray } from 'lodash';
+import { find, isArray } from 'lodash';
 import validator from './validator';
 
 export default function withFormValidations(WrappedComponent, inputs, redux, validations) {
@@ -12,7 +12,7 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
     };
 
     _field = name => {
-      return this.state.inputs.find(i => i.label === name)
+      return find(this.state.inputs, i => i.label === name);
     }
 
     _syncPasswordMatchValidator = input => {
