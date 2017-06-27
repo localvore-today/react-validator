@@ -3,7 +3,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 import * as Rules from './validation_rules';
-import { find, partial } from 'lodash';
+import { find, partial, uniq } from 'lodash';
 
 /**
    * Creates a validator instance
@@ -81,6 +81,7 @@ var validator = function () {
 
     // only run redux async rules if all synchronous rules have passed
     // currently not logging synchronous errors for redux callbacks, use store state
+    this._reduxRules = uniq(this._reduxRules);
     if (this._reduxRules.length > 0 && this._errors.length < 1) {
       this._reduxRules.forEach(function (r) {
         return _this._redux.store.dispatch(_this._redux.actions[r](_this._val));

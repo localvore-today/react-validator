@@ -1,5 +1,5 @@
 import * as Rules from './validation_rules';
-import { find, partial } from 'lodash';
+import { find, partial, uniq } from 'lodash';
 
 /**
    * Creates a validator instance
@@ -72,6 +72,7 @@ export default class validator {
 
     // only run redux async rules if all synchronous rules have passed
     // currently not logging synchronous errors for redux callbacks, use store state
+    this._reduxRules = uniq(this._reduxRules);
     if (this._reduxRules.length > 0 && this._errors.length < 1) {
       this._reduxRules.forEach(r => this._redux.store.dispatch(this._redux.actions[r](this._val)));
     }
