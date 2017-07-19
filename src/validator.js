@@ -1,5 +1,5 @@
 import * as Rules from './validation_rules';
-import { find, partial, uniq } from 'lodash';
+import { find, partial, uniqBy } from 'lodash';
 
 /**
    * Creates a validator instance
@@ -72,9 +72,9 @@ export default class validator {
 
     // only run redux async rules if all synchronous rules have passed
     // currently not logging synchronous errors for redux callbacks, use store state
-    this._reduxRules = uniq(this._reduxRules);
+    this._reduxRules = uniqBy(this._reduxRules, 'rule');
     if (this._reduxRules.length > 0 && this._errors.length < 1) {
-      this._reduxRules.forEach(r => this._redux.store.dispatch(this._redux.actions[r](this._val)));
+      this._reduxRules.forEach(r => r.promise = this._redux.store.dispatch(this._redux.actions[r.rule](this._val)));
     }
 
     // check for optional override
@@ -92,7 +92,7 @@ export default class validator {
       let method = partial(ruleToEval, this._val);
       return hasArgs ? !method(hasArgs.args) : !method();
     } else if (rule && this._redux.actions[rule]) {
-      this._reduxRules.push(rule);
+      this._reduxRules.push({ rule: rule, promise: Promise.resolve() });
     }
   }
 
