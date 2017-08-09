@@ -35,7 +35,7 @@ export var match = function match(val1, val2) {
 
 export var max = function max(val, _max) {
   if (typeof val === 'string') val = val.length;
-  return val >= _max;
+  return val < _max;
 };
 
 export var required = function required(val) {
