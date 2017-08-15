@@ -16,7 +16,7 @@ export const match = (val1, val2) => val1 === val2;
 
 export const max = (val, max) => {
   if (typeof val === 'string') val = val.length;
-  return val < max;
+  return val >= max;
 }
 
 export const required = val => ((val && !isArray(val) && val !== '') || (val && isArray(val) && val.length > 0));
