@@ -32,7 +32,7 @@ export const hasNumber = val => /\d/.test(val);
 export const hasUppercase = val => {
   let pass = false;
   for( var i = 0; i <= (val.length - 1); i++) {
-    pass = !/^\d+$/.test(val[i]) && val[i] === val[i].toUpperCase();
+    pass = /^[A-Z]+$/.test(val[i])
     if (pass) return true;
   }
   return false;
