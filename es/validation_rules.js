@@ -56,7 +56,7 @@ export var hasNumber = function hasNumber(val) {
 export var hasUppercase = function hasUppercase(val) {
   var pass = false;
   for (var i = 0; i <= val.length - 1; i++) {
-    pass = !/^\d+$/.test(val[i]) && val[i] === val[i].toUpperCase();
+    pass = /^[A-Z]+$/.test(val[i]);
     if (pass) return true;
   }
   return false;
