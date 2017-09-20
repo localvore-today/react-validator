@@ -1,4 +1,5 @@
 import { isArray } from 'lodash';
+import zxcvbn from 'zxcvbn';
 
 export const number = val => /^-?\d*\.?\d*$/.test(val);
 
@@ -45,4 +46,9 @@ export const hasLowercase = val => {
     if (pass) return true;
   }
   return false;
+}
+
+export const strength = val => {
+  let result = zxcvbn(val);
+  return result.score > 0;
 }
