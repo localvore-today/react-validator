@@ -11,6 +11,17 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
       })
     };
 
+    _addInputs = inputs => {
+      if (!isArray(inputs)) inputs = [inputs];
+
+      this.setState({ 
+        inputs: this.state.inputs.concat(inputs.map(i => {
+          i.validations = new validator(i.rules, redux, validations)
+          return i;
+        })) 
+      });
+    }
+
     _field = name => {
       return find(this.state.inputs, i => i.label === name);
     }
@@ -86,6 +97,7 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
     render() {
       return <WrappedComponent
         {...this.props}
+        addInputs={this._addInputs}
         field={this._field}
         inputs={this.state.inputs}
         onChange={this._onChange}
