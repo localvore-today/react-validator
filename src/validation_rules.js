@@ -25,7 +25,8 @@ export const max = (val, max) => {
   return val >= max;
 }
 
-export const required = val => ((val && !isArray(val) && val !== '') || (val && isArray(val) && val.length > 0));
+export const required = val => ((val && !isArray(val) && val !== '') || 
+  (val && isArray(val) && val.length > 0 && val[0] !== ''));
 
 export const hasNumber = val => /\d/.test(val);
 
