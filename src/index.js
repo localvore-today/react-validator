@@ -16,7 +16,7 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
 
       this.setState({ 
         inputs: this.state.inputs.concat(inputs.map(i => {
-          i.validations = new validator(i.rules, redux, validations)
+          i.validations = new validator(i.rules, redux, validations, i.value)
           return i;
         })) 
       });

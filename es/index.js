@@ -33,7 +33,7 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
 
         _this.setState({
           inputs: _this.state.inputs.concat(inputs.map(function (i) {
-            i.validations = new validator(i.rules, redux, validations);
+            i.validations = new validator(i.rules, redux, validations, i.value);
             return i;
           }))
         });

@@ -54,9 +54,9 @@ import { find, partial, uniqBy } from 'lodash';
    * });
    */
 export default class validator {
-  constructor(rules, redux, validations) {
+  constructor(rules, redux, validations, value) {
     this._rules = rules;
-    this._val = '';
+    this._val = value ? value : '';
     this._redux = redux;
     this._validations = validations || {};
     this._reduxRules = [];

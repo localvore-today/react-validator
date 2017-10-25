@@ -34,6 +34,16 @@ export var match = function match(val1, val2) {
   return val1 === val2;
 };
 
+export var minNum = function minNum(val, limit) {
+  if (typeof val === 'string') val = parseInt(val);
+  return val < limit;
+};
+
+export var maxNum = function maxNum(val, limit) {
+  if (typeof val === 'string') val = parseInt(val);
+  return val >= limit;
+};
+
 export var min = function min(val, _min) {
   if (typeof val === 'string') val = val.length;
   return val < _min;
