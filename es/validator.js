@@ -59,11 +59,11 @@ import { find, partial, uniqBy } from 'lodash';
    */
 
 var validator = function () {
-  function validator(rules, redux, validations) {
+  function validator(rules, redux, validations, value) {
     _classCallCheck(this, validator);
 
     this._rules = rules;
-    this._val = '';
+    this._val = value ? value : '';
     this._redux = redux;
     this._validations = validations || {};
     this._reduxRules = [];

@@ -15,6 +15,16 @@ export const notEmpty = val => /\S+/.test(val);
 
 export const match = (val1, val2) => val1 === val2;
 
+export const minNum = (val, limit) => {
+  if (typeof val === 'string') val = parseInt(val);
+  return val < limit;
+}
+
+export const maxNum = (val, limit) => {
+  if (typeof val === 'string') val = parseInt(val);
+  return val >= limit;
+}
+
 export const min = (val, min) => {
   if (typeof val === 'string') val = val.length;
   return val < min;
@@ -25,7 +35,8 @@ export const max = (val, max) => {
   return val >= max;
 }
 
-export const required = val => ((val && !isArray(val) && val !== '') || (val && isArray(val) && val.length > 0));
+export const required = val => ((val && !isArray(val) && val !== '') || 
+  (val && isArray(val) && val.length > 0 && val[0] !== ''));
 
 export const hasNumber = val => /\d/.test(val);
 

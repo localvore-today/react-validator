@@ -28,6 +28,15 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
           i.validations = new validator(i.rules, redux, validations);
           return i;
         })
+      }, _this._addInputs = function (inputs) {
+        if (!isArray(inputs)) inputs = [inputs];
+
+        _this.setState({
+          inputs: _this.state.inputs.concat(inputs.map(function (i) {
+            i.validations = new validator(i.rules, redux, validations, i.value);
+            return i;
+          }))
+        });
       }, _this._field = function (name) {
         return find(_this.state.inputs, function (i) {
           return i.label === name;
@@ -97,6 +106,7 @@ export default function withFormValidations(WrappedComponent, inputs, redux, val
 
     _class2.prototype.render = function render() {
       return React.createElement(WrappedComponent, _extends({}, this.props, {
+        addInputs: this._addInputs,
         field: this._field,
         inputs: this.state.inputs,
         onChange: this._onChange,
