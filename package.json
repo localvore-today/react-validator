@@ -33,6 +33,9 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "dependencies": {
     "zxcvbn": "^4.4.2"
   },
