@@ -58,6 +58,17 @@ export var required = function required(val) {
   return val && !isArray(val) && val !== '' || val && isArray(val) && val.length > 0 && val[0] !== '';
 };
 
+export var requiresOther = function requiresOther(val, other) {
+  if (val !== '') {
+    if (typeof other === 'function') {
+      return other() !== '';
+    } else {
+      return other !== '';
+    }
+  }
+  return true;
+};
+
 export var hasNumber = function hasNumber(val) {
   return (/\d/.test(val)
   );

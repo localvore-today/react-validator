@@ -38,6 +38,17 @@ export const max = (val, max) => {
 export const required = val => ((val && !isArray(val) && val !== '') || 
   (val && isArray(val) && val.length > 0 && val[0] !== ''));
 
+export const requiresOther = (val, other) => {
+  if (val !== '') {
+    if (typeof other === 'function') {
+      return other() !== '';
+    } else {
+      return other !== ''
+    }
+  }
+  return true;
+}
+
 export const hasNumber = val => /\d/.test(val);
 
 //export const hasUppercase = val => val ? val.filter(v => v === v.toUpperCase()).length > 0 : true;
