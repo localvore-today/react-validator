@@ -1,5 +1,4 @@
 import { isArray } from 'lodash';
-import zxcvbn from 'zxcvbn';
 
 export var number = function number(val) {
   return (/^-?\d*\.?\d*$/.test(val)
