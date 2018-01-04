@@ -93,6 +93,8 @@ export var hasLowercase = function hasLowercase(val) {
 };
 
 export var strength = function strength(val) {
+  if (!zxcvbn) return true;
+
   var result = zxcvbn(val);
   return result.score > 0;
 };
