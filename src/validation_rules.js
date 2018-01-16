@@ -70,7 +70,7 @@ export const hasLowercase = val => {
 }
 
 export const strength = val => {
-  if (!zxcvbn) return true;
+  if (!window['zxcvbn']) return true;
 
   let result = zxcvbn(val);
   return result.score > 0;
